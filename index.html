@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O'Noso | Restaurante en Barcelona Sants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; padding: 0; }
+
+  :root {
+    --black: #10110d;
+    --ink: #171912;
+    --olive: #667246;
+    --olive-dark: #30371f;
+    --olive-soft: #d8ddc5;
+    --marengo: #262d2a;
+    --graphite: #44483f;
+    --brass: #b9904f;
+    --clay: #9a6244;
+    --cream: #f3eadb;
+    --paper: #fbf7ef;
+    --white: #fffaf1;
+    --smoke: #9c9b8d;
+    --line: rgba(243,234,219,0.18);
+    --line-dark: rgba(48,55,31,0.16);
+    --muted: rgba(243,234,219,0.74);
+    --soft: rgba(243,234,219,0.09);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-width: 320px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  .shell {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    border-bottom: 1px solid var(--line);
+    background: rgba(23,25,18,0.82);
+    backdrop-filter: blur(18px);
+  }
+
+  .nav {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .brand-mark {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 2rem;
+    letter-spacing: 0.01em;
+  }
+
+  .brand-place {
+    color: var(--olive-soft);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--brass); }
+
+  .nav-cta,
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 1.35rem;
+    border: 1px solid var(--olive);
+    background: var(--olive);
+    color: var(--cream);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-cta:hover,
+  .button:hover {
+    transform: translateY(-2px);
+    background: var(--brass);
+    border-color: var(--brass);
+    color: var(--black);
+  }
+
+  .button.secondary {
+    background: transparent;
+    color: var(--cream);
+    border-color: rgba(243,234,219,0.38);
+  }
+
+  .button.secondary:hover {
+    border-color: var(--brass);
+    background: var(--brass);
+    color: var(--black);
+  }
+
+  .hero {
+    min-height: 96vh;
+    padding-top: 76px;
+    position: relative;
+    display: grid;
+    align-items: stretch;
+    isolation: isolate;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(circle at 74% 28%, rgba(185,144,79,0.2), transparent 32%),
+      linear-gradient(90deg, rgba(23,25,18,0.96) 0%, rgba(23,25,18,0.78) 42%, rgba(23,25,18,0.28) 100%),
+      linear-gradient(0deg, rgba(23,25,18,0.98) 0%, rgba(23,25,18,0.08) 54%),
+      url("assets/hero-barra-oliva.png") center right / cover;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 76px 0 0;
+    z-index: -1;
+    background:
+      linear-gradient(115deg, rgba(102,114,70,0.16), transparent 38%),
+      linear-gradient(180deg, transparent 0%, rgba(23,25,18,0.45) 100%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    min-height: calc(96vh - 76px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.65fr);
+    gap: 3rem;
+    align-items: end;
+    padding: 7rem 0 3.2rem;
+  }
+
+  .eyebrow {
+    color: rgba(255,255,255,0.62);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  .serif {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+  }
+
+  .hero h1 {
+    max-width: 760px;
+    margin-top: 1.2rem;
+    font-size: clamp(4rem, 8vw, 8.7rem);
+    line-height: 0.86;
+    letter-spacing: 0;
+  }
+
+  .hero h1 span { color: var(--olive-soft); font-style: italic; }
+
+  .hero-copy {
+    max-width: 540px;
+    margin-top: 1.6rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.45vw, 1.18rem);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2.1rem;
+  }
+
+  .hero-panel {
+    align-self: end;
+    border: 1px solid var(--line);
+    background: rgba(38,45,42,0.76);
+    backdrop-filter: blur(20px);
+    padding: 1.2rem;
+  }
+
+  .menu-price {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .price {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 4.4rem;
+    line-height: 0.9;
+  }
+
+  .hero-panel p {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .panel-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+  }
+
+  .meta-box {
+    min-height: 92px;
+    padding: 0.9rem;
+    background: var(--soft);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .meta-box strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .meta-box span {
+    display: block;
+    margin-top: 0.35rem;
+    color: rgba(255,255,255,0.58);
+    font-size: 0.78rem;
+  }
+
+  .marquee {
+    border-block: 1px solid var(--line);
+    background: var(--olive-dark);
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    width: max-content;
+    display: flex;
+    gap: 2.5rem;
+    padding: 0.95rem 0;
+    animation: move 24s linear infinite;
+  }
+
+  .marquee span {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @keyframes move {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  section { padding: 6.2rem 0; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3rem;
+  }
+
+  .section-head h2 {
+    margin-top: 0.65rem;
+    font-size: clamp(2.8rem, 5vw, 5.4rem);
+    line-height: 0.92;
+    letter-spacing: 0;
+  }
+
+  .section-head p {
+    color: var(--muted);
+    max-width: 620px;
+    font-size: 1rem;
+  }
+
+  .story {
+    background: var(--ink);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.85fr) 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .image-stack {
+    display: grid;
+    grid-template-columns: 1fr 0.72fr;
+    gap: 0.9rem;
+    align-items: end;
+  }
+
+  .image-stack img {
+    width: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.04) brightness(0.92);
+  }
+
+  .image-stack img:first-child { height: 520px; }
+  .image-stack img:last-child { height: 330px; }
+
+  .story-copy {
+    max-width: 600px;
+    justify-self: end;
+  }
+
+  .story-copy p {
+    color: var(--muted);
+    margin-top: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 2rem;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .fact {
+    min-height: 128px;
+    padding: 1rem;
+    background: var(--ink);
+  }
+
+  .fact b {
+    display: block;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 2.7rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .fact span {
+    display: block;
+    margin-top: 0.6rem;
+    color: rgba(243,234,219,0.62);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .menu .eyebrow { color: var(--olive-dark); }
+  .menu .section-head p { color: rgba(23,25,18,0.66); }
+
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .tab {
+    min-height: 44px;
+    padding: 0 1rem;
+    border: 1px solid var(--line-dark);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .tab.active {
+    background: var(--olive);
+    color: var(--cream);
+  }
+
+  .menu-board {
+    display: grid;
+    grid-template-columns: 0.74fr 1fr;
+    border: 1px solid var(--line-dark);
+    background: #fffdf7;
+  }
+
+  .menu-intro {
+    min-height: 520px;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--line-dark);
+    background:
+      linear-gradient(180deg, rgba(48,55,31,0.18), rgba(23,25,18,0.80)),
+      url("https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=82") center / cover;
+    color: var(--cream);
+  }
+
+  .menu-intro .price { font-size: clamp(4.5rem, 10vw, 8rem); }
+
+  .menu-intro small {
+    color: rgba(255,255,255,0.74);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .menu-list { padding: 0.4rem 1.5rem 1.1rem; }
+
+  .menu-pane { display: none; }
+  .menu-pane.active { display: block; }
+
+  .dish {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .dish:last-child { border-bottom: 0; }
+
+  .dish h3 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  .dish p {
+    margin-top: 0.35rem;
+    color: rgba(23,25,18,0.62);
+    font-size: 0.9rem;
+  }
+
+  .dish span {
+    padding-top: 0.22rem;
+    color: var(--graphite);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .events {
+    background:
+      linear-gradient(135deg, rgba(185,144,79,0.12), transparent 44%),
+      var(--olive-dark);
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.86fr) 1fr;
+    gap: 3rem;
+    align-items: stretch;
+  }
+
+  .events-photo {
+    min-height: 620px;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(16,17,13,0.12), rgba(16,17,13,0.82)),
+      url("assets/hero-barra-oliva.png") center / cover;
+    display: flex;
+    align-items: end;
+    padding: 1.4rem;
+  }
+
+  .events-photo-card {
+    width: 100%;
+    border: 1px solid rgba(243,234,219,0.18);
+    background: rgba(16,17,13,0.72);
+    backdrop-filter: blur(16px);
+    padding: 1rem;
+  }
+
+  .events-photo-card strong {
+    display: block;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .events-photo-card span {
+    display: block;
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .events-content {
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .events-content h2 {
+    max-width: 720px;
+    margin-top: 0.7rem;
+    font-size: clamp(3rem, 5.5vw, 6rem);
+    line-height: 0.9;
+  }
+
+  .events-content > p {
+    max-width: 660px;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .event-types {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .event-card {
+    min-height: 168px;
+    padding: 1.1rem;
+    background: rgba(16,17,13,0.84);
+  }
+
+  .event-card h3 {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  .event-card p {
+    margin-top: 0.55rem;
+    color: rgba(243,234,219,0.66);
+    font-size: 0.9rem;
+  }
+
+  .event-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+
+  .service-pill {
+    border: 1px solid rgba(216,221,197,0.24);
+    background: rgba(216,221,197,0.08);
+    padding: 0.85rem;
+    color: var(--olive-soft);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .reserve {
+    background:
+      linear-gradient(135deg, rgba(102,114,70,0.24), transparent 42%),
+      var(--marengo);
+  }
+
+  .reserve-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .reserve-card {
+    border: 1px solid var(--line);
+    background: var(--ink);
+    padding: 1.4rem;
+  }
+
+  .reserve-card h2 {
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.9;
+  }
+
+  .reserve-card p {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+
+  .contact-list {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .availability {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+  }
+
+  .slot {
+    min-height: 78px;
+    padding: 0.75rem;
+    border: 1px solid rgba(216,221,197,0.22);
+    background: rgba(102,114,70,0.18);
+  }
+
+  .slot strong {
+    display: block;
+    color: var(--cream);
+    font-size: 0.95rem;
+  }
+
+  .slot span {
+    display: block;
+    margin-top: 0.25rem;
+    color: rgba(243,234,219,0.58);
+    font-size: 0.76rem;
+  }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--ink);
+  }
+
+  .contact-row b {
+    color: rgba(243,234,219,0.58);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .contact-row span,
+  .contact-row a {
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .form {
+    display: grid;
+    gap: 1rem;
+    border: 1px solid var(--line);
+    background: rgba(16,17,13,0.48);
+    padding: 1.4rem;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .field-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.45rem;
+    color: rgba(243,234,219,0.62);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid rgba(243,234,219,0.22);
+    border-radius: 0;
+    background: rgba(243,234,219,0.08);
+    color: var(--cream);
+    padding: 0.85rem 0.9rem;
+    font: inherit;
+    font-size: 0.95rem;
+    outline: none;
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  select option {
+    background: var(--marengo);
+    color: var(--cream);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--brass);
+  }
+
+  .form-note {
+    color: rgba(243,234,219,0.56);
+    font-size: 0.8rem;
+  }
+
+  .booking-summary {
+    display: none;
+    gap: 0.85rem;
+    padding: 1rem;
+    border: 1px solid rgba(185,144,79,0.45);
+    background: rgba(185,144,79,0.12);
+  }
+
+  .booking-summary.show { display: grid; }
+
+  .booking-summary b {
+    color: var(--brass);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .booking-summary p {
+    color: var(--cream);
+    font-size: 0.95rem;
+  }
+
+  .booking-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .button.whatsapp {
+    border-color: var(--olive-soft);
+    background: var(--olive-soft);
+    color: var(--olive-dark);
+  }
+
+  .button.whatsapp:hover {
+    background: transparent;
+    color: var(--cream);
+  }
+
+  .location {
+    background: var(--ink);
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+  }
+
+  .map {
+    min-height: 420px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--marengo);
+  }
+
+  .map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: saturate(0.78) contrast(0.96);
+  }
+
+  .reviews {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .review {
+    padding: 1.3rem;
+    background: var(--ink);
+  }
+
+  .review p {
+    color: rgba(243,234,219,0.78);
+    font-size: 0.98rem;
+  }
+
+  .review b {
+    display: block;
+    margin-top: 1rem;
+    color: rgba(243,234,219,0.5);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    background: #0b0c08;
+    padding: 2.2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.4rem;
+    align-items: center;
+    color: rgba(243,234,219,0.5);
+    font-size: 0.82rem;
+  }
+
+  .toast {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 80;
+    max-width: min(360px, calc(100% - 2.4rem));
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 700;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 980px) {
+    .nav-links { display: none; }
+    .hero-content,
+    .story-grid,
+    .section-head,
+    .events-grid,
+    .menu-board,
+    .reserve-layout,
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-content { padding-top: 5rem; }
+    .menu-intro { min-height: 360px; border-right: 0; border-bottom: 1px solid var(--line-dark); }
+    .story-copy { justify-self: start; }
+  }
+
+  @media (max-width: 680px) {
+    .shell { width: min(100% - 28px, 1180px); }
+    .nav { height: 68px; }
+    .brand-place { display: none; }
+    .nav-cta { min-height: 40px; padding-inline: 0.9rem; font-size: 0.7rem; }
+    .hero { min-height: auto; padding-top: 68px; }
+    .hero-content { min-height: auto; padding: 4rem 0 2rem; gap: 2rem; }
+    .hero h1 { font-size: clamp(3.7rem, 22vw, 6rem); }
+    .hero-actions { display: grid; }
+    .button { width: 100%; }
+    .panel-meta,
+    .facts,
+    .event-types,
+    .event-services,
+    .availability,
+    .field-grid,
+    .field-grid-3,
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+    section { padding: 4.2rem 0; }
+    .image-stack { grid-template-columns: 1fr; }
+    .image-stack img:first-child,
+    .image-stack img:last-child { height: 310px; }
+    .contact-row { grid-template-columns: 1fr; gap: 0.35rem; }
+    .map { min-height: 330px; }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#inicio" aria-label="O'Noso inicio">
+        <span class="brand-mark">O'Noso</span>
+        <span class="brand-place">Barcelona Sants</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#historia">Nosotros</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#reservas">Reservas</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+      </ul>
+      <a class="nav-cta" href="#reservas">Reservar</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="shell hero-content">
+        <div>
+          <p class="eyebrow reveal">Cafetería restaurante · Cocina de mercado</p>
+          <h1 class="reveal">Comer bien en Sants, <span>sin complicarlo.</span></h1>
+          <p class="hero-copy reveal">O'Noso es un restaurante de barrio con mesa cercana, menú diario cuidado y cocina honesta. Platos reconocibles, producto fresco y un servicio ágil para comer como toca.</p>
+          <div class="hero-actions reveal">
+            <a class="button" href="#reservas">Reservar mesa</a>
+            <a class="button secondary" href="#menu">Ver menú del día</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Menú del día">
+          <div class="menu-price">
+            <div>
+              <p class="eyebrow">Menú del día</p>
+              <p>Primero, segundo, postre y bebida. Cambia según mercado y temporada.</p>
+            </div>
+            <div class="price">13€</div>
+          </div>
+          <div class="panel-meta">
+            <div class="meta-box">
+              <strong>Mediodía</strong>
+              <span>Lunes a sábado · 13:00 a 16:00</span>
+            </div>
+            <div class="meta-box">
+              <strong>Sants</strong>
+              <span>Carrer de Sants, junto a la estación</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Menú diario 13€</span><span>Cocina de mercado</span><span>Café y sobremesa</span><span>Eventos privados</span><span>Vermouth ecológico</span><span>Reserva recomendada</span>
+        <span>Menú diario 13€</span><span>Cocina de mercado</span><span>Café y sobremesa</span><span>Eventos privados</span><span>Vermouth ecológico</span><span>Reserva recomendada</span>
+      </div>
+    </div>
+
+    <section class="story" id="historia">
+      <div class="shell story-grid">
+        <div class="image-stack reveal">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=82" alt="Mesa servida en restaurante">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=700&q=82" alt="Cocina de restaurante en servicio">
+        </div>
+        <div class="story-copy reveal">
+          <p class="eyebrow">Nuestra forma de cocinar</p>
+          <h2 class="serif" style="font-size:clamp(3rem,5vw,5.6rem);line-height:.92;margin-top:.7rem;">Un restaurante de diario con oficio.</h2>
+          <p>La dinámica de O'Noso es sencilla: una cocina que cambia con el mercado, servicio cercano y platos pensados para disfrutar sin ceremonia. Aquí importan la temperatura del plato, el punto de cocción y que la mesa se sienta atendida.</p>
+          <p>Entre semana funcionamos como casa de comidas para el barrio y para quien pasa por Sants. El fin de semana mantenemos ese mismo espíritu, con una carta corta, tapas y vermouth.</p>
+          <div class="facts">
+            <div class="fact"><b>13€</b><span>Menú completo</span></div>
+            <div class="fact"><b>4+4</b><span>Primeros y segundos</span></div>
+            <div class="fact"><b>5 min</b><span>De Sants Estació</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Carta viva</p>
+            <h2>Menú del día y especialidades.</h2>
+          </div>
+          <p>El menú cambia según temporada. Esta estructura ayuda al cliente a entender rápidamente qué se come, cuánto cuesta y qué tipo de cocina encontrará.</p>
+        </div>
+
+        <div class="tabs reveal" role="tablist" aria-label="Categorías de menú">
+          <button class="tab active" type="button" data-tab="primeros">Primeros</button>
+          <button class="tab" type="button" data-tab="segundos">Segundos</button>
+          <button class="tab" type="button" data-tab="barra">Barra y vermouth</button>
+        </div>
+
+        <div class="menu-board reveal">
+          <div class="menu-intro">
+            <div>
+              <p class="eyebrow">Mediodía</p>
+              <div class="price">13€</div>
+            </div>
+            <small>Incluye primero + segundo + postre + bebida</small>
+          </div>
+
+          <div class="menu-list">
+            <div class="menu-pane active" id="pane-primeros">
+              <article class="dish">
+                <div><h3>Arroz caldoso de marisco</h3><p>Caldo intenso, sofrito lento y pescado de mercado.</p></div><span>Menú</span>
+              </article>
+              <article class="dish">
+                <div><h3>Canelones gratinados</h3><p>Carne guisada, bechamel ligera y gratinado al momento.</p></div><span>Menú</span>
+              </article>
+              <article class="dish">
+                <div><h3>Ensalada de tres quesos</h3><p>Pera, nueces, hojas frescas y vinagreta de módena.</p></div><span>Menú</span>
+              </article>
+              <article class="dish">
+                <div><h3>Verduras de temporada</h3><p>Plancha caliente, aceite de oliva y alioli suave.</p></div><span>Menú</span>
+              </article>
+            </div>
+
+            <div class="menu-pane" id="pane-segundos">
+              <article class="dish">
+                <div><h3>Bacalao a la llauna</h3><p>Receta catalana, ajo, pimentón y punto crujiente.</p></div><span>Menú</span>
+              </article>
+              <article class="dish">
+                <div><h3>Entrecot de ternera</h3><p>Patatas naturales, ensalada y salsa de la casa.</p></div><span>Supl.</span>
+              </article>
+              <article class="dish">
+                <div><h3>Pollo a la brasa</h3><p>Marinado con hierbas, jugoso por dentro y dorado por fuera.</p></div><span>Menú</span>
+              </article>
+              <article class="dish">
+                <div><h3>Merluza a la romana</h3><p>Rebozado fino y guarnición de verduras salteadas.</p></div><span>Menú</span>
+              </article>
+            </div>
+
+            <div class="menu-pane" id="pane-barra">
+              <article class="dish">
+                <div><h3>Vermouth ecológico</h3><p>Servido con aperitivo de la casa.</p></div><span>2,60€</span>
+              </article>
+              <article class="dish">
+                <div><h3>Patatas calientes con jamón</h3><p>Tapa de barra, sencilla y directa.</p></div><span>3,50€</span>
+              </article>
+              <article class="dish">
+                <div><h3>Copa de vino de la casa</h3><p>Tinto o blanco, selección local.</p></div><span>1,40€</span>
+              </article>
+              <article class="dish">
+                <div><h3>Café y postre casero</h3><p>Para cerrar con calma la comida de mediodía.</p></div><span>Desde 2€</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="events" id="eventos">
+      <div class="shell events-grid">
+        <div class="events-photo reveal">
+          <div class="events-photo-card">
+            <strong>Eventos en O'Noso</strong>
+            <span>Un comedor cercano, barra con carácter y cocina adaptable para celebraciones pequeñas y encuentros de grupo.</span>
+          </div>
+        </div>
+
+        <div class="events-content reveal">
+          <div>
+            <p class="eyebrow">Eventos de todo tipo</p>
+            <h2>Celebraciones con sabor de barrio.</h2>
+          </div>
+          <p>Preparamos comidas y reuniones con formato flexible: mesa compartida, menú cerrado, tapeo en barra o servicio para grupos. Ideal para celebraciones familiares, empresa, cumpleaños, comidas después de reuniones, vermouths y encuentros informales.</p>
+
+          <div class="event-types">
+            <article class="event-card">
+              <h3>Familia y amigos</h3>
+              <p>Cumpleaños, comidas familiares, aniversarios y mesas largas con menú cerrado.</p>
+            </article>
+            <article class="event-card">
+              <h3>Empresa</h3>
+              <p>Comidas de equipo, reuniones informales, despedidas y pequeños encuentros corporativos.</p>
+            </article>
+            <article class="event-card">
+              <h3>Vermouth y tapeo</h3>
+              <p>Formato más relajado con barra, tapas, vino de la casa y servicio ágil.</p>
+            </article>
+            <article class="event-card">
+              <h3>Menú a medida</h3>
+              <p>Opciones vegetarianas, alergias, horarios concretos y propuesta según presupuesto.</p>
+            </article>
+          </div>
+
+          <div class="event-services" aria-label="Servicios para eventos">
+            <div class="service-pill">Menú cerrado</div>
+            <div class="service-pill">Grupos +6</div>
+            <div class="service-pill">Alergias</div>
+            <div class="service-pill">Vermouth</div>
+            <div class="service-pill">Sobremesa</div>
+            <div class="service-pill">Reserva previa</div>
+          </div>
+
+          <div class="hero-actions" style="margin-top:0.2rem;">
+            <a class="button" href="#reservas">Solicitar evento</a>
+            <a class="button secondary" href="#ubicacion">Ver ubicación</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reserve" id="reservas">
+      <div class="shell reserve-layout">
+        <div class="reserve-card reveal">
+          <p class="eyebrow">Reservas online</p>
+          <h2>Asegura tu mesa o evento.</h2>
+          <p>El comedor es pequeño y el servicio de mediodía se llena rápido. Rellena la solicitud y confirma por WhatsApp con el mensaje preparado.</p>
+          <div class="availability" aria-label="Turnos de reserva">
+            <div class="slot"><strong>13:00</strong><span>Primer turno</span></div>
+            <div class="slot"><strong>14:00</strong><span>Mayor demanda</span></div>
+            <div class="slot"><strong>15:00</strong><span>Últimas mesas</span></div>
+          </div>
+          <div class="contact-list">
+            <div class="contact-row"><b>Dirección</b><span>Carrer de Sants, 171-173 · 08028 Barcelona</span></div>
+            <div class="contact-row"><b>Horario</b><span>Lun - Sáb · 13:00 - 16:00 h</span></div>
+            <div class="contact-row"><b>Metro</b><span>Sants Estació · L3 / L5</span></div>
+            <div class="contact-row"><b>Teléfono</b><a href="tel:+34934900000">Llámanos directamente</a></div>
+          </div>
+        </div>
+
+        <form class="form reveal" id="booking-form" onsubmit="submitReserva(event)">
+          <label>Tipo de solicitud
+            <select name="solicitud" id="booking-type" required>
+              <option value="Mesa">Mesa para comer</option>
+              <option value="Evento privado">Evento privado</option>
+              <option value="Cumpleaños">Cumpleaños</option>
+              <option value="Empresa">Comida de empresa</option>
+              <option value="Vermouth de grupo">Vermouth de grupo</option>
+            </select>
+          </label>
+          <div class="field-grid">
+            <label>Nombre
+              <input name="nombre" type="text" placeholder="María García" required>
+            </label>
+            <label>Teléfono
+              <input name="telefono" type="tel" placeholder="+34 6XX XXX XXX" required>
+            </label>
+          </div>
+          <div class="field-grid">
+            <label>Fecha
+              <input id="res-date" name="fecha" type="date" required>
+            </label>
+            <label>Hora
+              <select name="hora" required>
+                <option value="">Selecciona</option>
+                <option>13:00</option>
+                <option>13:30</option>
+                <option>14:00</option>
+                <option>14:30</option>
+                <option>15:00</option>
+                <option>15:30</option>
+              </select>
+            </label>
+          </div>
+          <div class="field-grid">
+            <label>Personas
+              <select name="personas" required>
+                <option>1 persona</option>
+                <option selected>2 personas</option>
+                <option>3 personas</option>
+                <option>4 personas</option>
+                <option>5-6 personas</option>
+                <option>Grupo +6</option>
+              </select>
+            </label>
+            <label>Email
+              <input name="email" type="email" placeholder="tu@email.com">
+            </label>
+          </div>
+          <div class="field-grid-3">
+            <label>Formato
+              <select name="formato">
+                <option value="Menú del día">Menú del día</option>
+                <option value="Menú cerrado para grupo">Menú cerrado para grupo</option>
+                <option value="Tapeo y vermouth">Tapeo y vermouth</option>
+                <option value="Propuesta a medida">Propuesta a medida</option>
+              </select>
+            </label>
+            <label>Presupuesto
+              <select name="presupuesto">
+                <option value="Por definir">Por definir</option>
+                <option value="13-20€ por persona">13-20€ por persona</option>
+                <option value="20-30€ por persona">20-30€ por persona</option>
+                <option value="+30€ por persona">+30€ por persona</option>
+              </select>
+            </label>
+            <label>Espacio
+              <select name="espacio">
+                <option value="Mesa en comedor">Mesa en comedor</option>
+                <option value="Zona de barra">Zona de barra</option>
+                <option value="Comedor completo">Comedor completo</option>
+                <option value="A consultar">A consultar</option>
+              </select>
+            </label>
+          </div>
+          <label>Notas o alergias
+            <textarea name="notas" placeholder="Alergias, menú vegetariano, cumpleaños, empresa, montaje, horario especial..."></textarea>
+          </label>
+          <button class="button" type="submit">Solicitar reserva</button>
+          <div class="booking-summary" id="booking-summary" aria-live="polite">
+            <b>Pre-reserva generada</b>
+            <p id="booking-text"></p>
+            <div class="booking-actions">
+              <a class="button whatsapp" id="whatsapp-link" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+              <a class="button secondary" href="tel:+34934900000">Llamar al restaurante</a>
+            </div>
+          </div>
+          <p class="form-note">La reserva queda como solicitud hasta que el restaurante la confirme por WhatsApp o teléfono.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="location" id="ubicacion">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Ubicación</p>
+            <h2>Estamos en Sants.</h2>
+          </div>
+          <p>A pocos minutos de Sants Estació, perfecto para una comida de diario, una parada entre trenes o un vermouth tranquilo.</p>
+        </div>
+
+        <div class="location-grid">
+          <div class="map reveal">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.5!2d2.1401!3d41.3795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a498452ba5af9d%3A0x83c63fdb30ae8c75!2sCarrer%20de%20Sants%2C%20171%2C%2008028%20Barcelona!5e0!3m2!1ses!2ses!4v1" loading="lazy" allowfullscreen title="Mapa de O'Noso en Carrer de Sants"></iframe>
+          </div>
+          <div class="reviews reveal">
+            <article class="review">
+              <p>"Cocina sencilla, bien hecha y con un trato muy agradable. Una dirección de barrio para repetir."</p>
+              <b>Cliente habitual</b>
+            </article>
+            <article class="review">
+              <p>"El menú del día cumple lo que promete: buen producto, raciones correctas y servicio rápido."</p>
+              <b>Comida de mediodía</b>
+            </article>
+            <article class="review">
+              <p>"Ideal si estás cerca de Sants y quieres comer como en un restaurante de verdad, no de paso."</p>
+              <b>Visitante en Barcelona</b>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span class="brand-mark">O'Noso</span>
+      <span>© 2026 O'Noso Cafetería Restaurant · Barcelona Sants</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Pre-reserva lista. Confírmala por WhatsApp o llama al restaurante.</div>
+
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const panes = document.querySelectorAll(".menu-pane");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.tab;
+      tabs.forEach((item) => item.classList.toggle("active", item === tab));
+      panes.forEach((pane) => pane.classList.toggle("active", pane.id === "pane-" + target));
+    });
+  });
+
+  function submitReserva(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const solicitud = data.get("solicitud");
+    const nombre = data.get("nombre");
+    const telefono = data.get("telefono");
+    const fecha = data.get("fecha");
+    const hora = data.get("hora");
+    const personas = data.get("personas");
+    const formato = data.get("formato");
+    const presupuesto = data.get("presupuesto");
+    const espacio = data.get("espacio");
+    const email = data.get("email") || "sin email";
+    const notas = data.get("notas") || "sin notas";
+    const readableDate = formatDate(fecha);
+    const summary = `${solicitud}: ${personas} el ${readableDate} a las ${hora}. Formato: ${formato}. Presupuesto: ${presupuesto}. Espacio: ${espacio}. Nombre: ${nombre}. Tel: ${telefono}. Email: ${email}. Notas: ${notas}.`;
+    const whatsappMessage = `Hola O'Noso, quiero solicitar una reserva/evento.%0A%0A${encodeURIComponent(summary)}%0A%0AGracias.`;
+    const summaryBox = document.getElementById("booking-summary");
+    const summaryText = document.getElementById("booking-text");
+    const whatsappLink = document.getElementById("whatsapp-link");
+
+    summaryText.textContent = summary;
+    whatsappLink.href = "https://wa.me/34934900000?text=" + whatsappMessage;
+    summaryBox.classList.add("show");
+
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3600);
+  }
+
+  function formatDate(value) {
+    if (!value) return "fecha pendiente";
+    return new Intl.DateTimeFormat("es-ES", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }).format(new Date(value + "T12:00:00"));
+  }
+
+  function setDefaultDate() {
+    const input = document.getElementById("res-date");
+    if (!input) return;
+    const today = new Date().toISOString().split("T")[0];
+    input.min = today;
+    input.value = today;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  setDefaultDate();
+</script>
+</body>
+</html>
