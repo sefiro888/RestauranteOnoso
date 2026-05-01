@@ -76,6 +76,14 @@
     white-space: nowrap;
   }
 
+  .brand-type {
+    color: var(--olive-soft);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
   .brand-mark {
     font-family: "Instrument Serif", Georgia, serif;
     font-size: 2rem;
@@ -108,6 +116,39 @@
   }
 
   .nav-links a:hover { color: var(--brass); }
+
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(243,234,219,0.24);
+    background: rgba(243,234,219,0.08);
+    color: var(--cream);
+    cursor: pointer;
+  }
+
+  .menu-toggle span,
+  .menu-toggle::before,
+  .menu-toggle::after {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+
+  .menu-toggle {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .site-header.menu-open .menu-toggle span { opacity: 0; }
+  .site-header.menu-open .menu-toggle::before { transform: translateY(6px) rotate(45deg); }
+  .site-header.menu-open .menu-toggle::after { transform: translateY(-6px) rotate(-45deg); }
 
   .nav-cta,
   .button {
@@ -1040,14 +1081,92 @@
     .nav {
       height: 68px;
       min-width: 0;
-      width: 100vw !important;
-      max-width: 100vw !important;
-      padding: 0 14px;
-      margin: 0;
+      width: calc(100vw - 28px) !important;
+      max-width: calc(100vw - 28px) !important;
+      padding: 0;
+      margin: 0 auto;
+      position: relative;
     }
-    .brand { min-width: 0; gap: 0; }
+    .brand {
+      min-width: 0;
+      gap: 0.25rem;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+    .brand-type {
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+    }
     .brand-mark { font-size: 1.65rem; }
     .brand-place { display: none; }
+    .menu-toggle {
+      display: inline-flex !important;
+      position: fixed;
+      left: 12.5rem;
+      right: auto;
+      top: 12px;
+      z-index: 120;
+      width: auto;
+      min-width: 78px;
+      height: 44px;
+      padding: 0 0.9rem;
+      gap: 0;
+      background: var(--olive);
+      border-color: rgba(243,234,219,0.22);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+    }
+    .menu-toggle span {
+      width: auto;
+      height: auto;
+      background: transparent;
+      color: var(--cream);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .menu-toggle::before,
+    .menu-toggle::after {
+      display: none;
+    }
+    .nav-links {
+      position: fixed;
+      top: 68px;
+      left: 14px;
+      right: 14px;
+      display: grid;
+      gap: 0;
+      padding: 0.45rem;
+      border: 1px solid var(--line);
+      background: rgba(23,25,18,0.97);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.32);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    }
+    .site-header.menu-open .nav-links {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .site-header.menu-open .menu-toggle {
+      background: var(--brass);
+      color: var(--black);
+    }
+    .site-header.menu-open .menu-toggle span { opacity: 1; }
+    .nav-links li { list-style: none; }
+    .nav-links a {
+      display: block;
+      padding: 0.9rem 0.85rem;
+      border-bottom: 1px solid rgba(243,234,219,0.12);
+      color: var(--cream);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+    }
+    .nav-links li:last-child a { border-bottom: 0; }
     .nav-cta {
       display: none;
     }
@@ -1172,10 +1291,14 @@
   <header class="site-header">
     <div class="shell nav">
       <a class="brand" href="#inicio" aria-label="O'Noso inicio">
+        <span class="brand-type">Restaurante</span>
         <span class="brand-mark">O'Noso</span>
         <span class="brand-place">Barcelona Sants</span>
       </a>
-      <ul class="nav-links">
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">
+        <span>Menú</span>
+      </button>
+      <ul class="nav-links" id="main-menu">
         <li><a href="#historia">Nosotros</a></li>
         <li><a href="#menu">Menú</a></li>
         <li><a href="#eventos">Eventos</a></li>
@@ -1552,6 +1675,25 @@
 <script>
   const tabs = document.querySelectorAll(".tab");
   const panes = document.querySelectorAll(".menu-pane");
+  const header = document.querySelector(".site-header");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  if (menuToggle && header) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = header.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        header.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+      });
+    });
+  }
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
